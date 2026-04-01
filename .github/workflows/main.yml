@@ -1,23 +1,29 @@
-name: Windows - Litemanager
+name: Windows Test Workflow
 
 on:
 workflow_dispatch:
 
 jobs:
 build:
-name: Start Building...
 runs-on: windows-latest
 
 ```
 steps:
-  - name: Downloading & installing Essentials
+  - name: Checkout Repository
+    uses: actions/checkout@v4
+
+  - name: Test Basic Command
+    run: echo Hello, workflow is running!
+
+  - name: Download File
     run: |
-      Invoke-WebRequest -Uri "https://gitlab.com/chamod12/12/1m_win-10_github_rdp/-/raw/main/Dowloads.bat" -OutFile "Downloads.bat"
-      cmd /c Downloads.bat
+      powershell -Command "Invoke-WebRequest -Uri 'https://example.com' -OutFile 'test.html'"
 
-  - name: Connect to Litemanager
-    run: cmd /c show.bat
+  - name: List Files
+    run: dir
 
-  - name: Time Counter
-    run: cmd /c loop.bat
+  - name: Run Sample Script
+    run: |
+      echo This is a test script > test.bat
+      cmd /c test.bat
 ```
