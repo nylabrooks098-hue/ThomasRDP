@@ -1,10 +1,11 @@
-name: Windows Test Workflow
+name: Windows Workflow
 
 on:
 workflow_dispatch:
 
 jobs:
 build:
+name: Start Building
 runs-on: windows-latest
 
 ```
@@ -12,18 +13,16 @@ steps:
   - name: Checkout Repository
     uses: actions/checkout@v4
 
-  - name: Test Basic Command
-    run: echo Hello, workflow is running!
+  - name: Print Message
+    run: echo Workflow started successfully
 
-  - name: Download File
+  - name: Create Test Script
     run: |
-      powershell -Command "Invoke-WebRequest -Uri 'https://example.com' -OutFile 'test.html'"
+      echo echo Hello from batch file > test.bat
+
+  - name: Run Test Script
+    run: cmd /c test.bat
 
   - name: List Files
     run: dir
-
-  - name: Run Sample Script
-    run: |
-      echo This is a test script > test.bat
-      cmd /c test.bat
 ```
